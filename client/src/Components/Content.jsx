@@ -1,134 +1,40 @@
-import billie_eilish from "../assets/artist_img/billie_eilish.jpg";
-import wallows from "../assets/artist_img/wallows.jpg";
-import taylor_swift from "../assets/artist_img/taylor_swift.jpg";
-import laufey from "../assets/artist_img/laufey.jpg";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Content() {
+  const [topList, setToplist] = useState([]);
+
+  const getTopList = async () => {
+    try {
+      const response = await axios(
+        "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=f75adbfe975bfab18b02ad91c9db935c&format=json&limit=5"
+      );
+      console.log(response.data.artists.artist);
+      setToplist(response.data.artists.artist);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTopList();
+  }, []);
+
   return (
     <div className="mainContent-container p-5">
-      <h2 className="title text-4xl">TRENDING</h2>
+      <h2 className="title text-4xl">TOP ARTISTS</h2>
       <div className="artist-card-list flex flex-row">
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={billie_eilish}
-          />
-          <p>Billie Eilish</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={wallows}
-          />
-          <p>Wallows</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={taylor_swift}
-          />
-          <p>Taylor Swift</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={laufey}
-          />
-          <p>Laufey</p>
-        </div>
-      </div>
-      <h2 className="title text-4xl">Your Favourites</h2>
-      <div className="artist-card-list flex flex-row">
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={billie_eilish}
-          />
-          <p>Billie Eilish</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={wallows}
-          />
-          <p>Wallows</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={taylor_swift}
-          />
-          <p>Taylor Swift</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={laufey}
-          />
-          <p>Laufey</p>
-        </div>
-      </div>
-      <h2 className="title text-4xl">TRENDING</h2>
-      <div className="artist-card-list flex flex-row">
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={billie_eilish}
-          />
-          <p>Billie Eilish</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={wallows}
-          />
-          <p>Wallows</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={taylor_swift}
-          />
-          <p>Taylor Swift</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={laufey}
-          />
-          <p>Laufey</p>
-        </div>
-      </div>
-      <h2 className="title text-4xl">Your Favourites</h2>
-      <div className="artist-card-list flex flex-row">
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={billie_eilish}
-          />
-          <p>Billie Eilish</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={wallows}
-          />
-          <p>Wallows</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={taylor_swift}
-          />
-          <p>Taylor Swift</p>
-        </div>
-        <div className="artist-card flex flex-col items-center gap-2 p-5">
-          <img
-            className="artist-img w-[180px] h-[180px] rounded-full"
-            src={laufey}
-          />
-          <p>Laufey</p>
-        </div>
+        {topList.map((item) => {
+          return (
+            <div className="artist-card flex flex-col items-center gap-2 p-5">
+              <img
+                className="artist-img w-[150px] h-[150px] rounded-full"
+                src={item.image[1]["#text"]}
+              />
+              <p>{item.name}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
