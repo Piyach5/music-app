@@ -1,58 +1,37 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faPlay,
-  faPause,
-  faBackward,
-  faForward,
-} from "@fortawesome/free-solid-svg-icons";
-import {} from "@fortawesome/free-regular-svg-icons";
-library.add(faPlay, faPause, faBackward, faForward);
-import album_cover_ok_computer from "../assets/album_cover/album_cover_ok_computer.jpg";
-import { useState } from "react";
+import { useContext } from "react";
+import { ArtistsContext } from "../Pages/HomePage";
+import { ArtistIDContext } from "../Pages/HomePage";
 
 function MusicPlayer() {
-  const [isPlay, setIsPlay] = useState(false);
-
-  const PlayAndPause = (isPlay) => {
-    if (isPlay == false) {
-      return (
-        <FontAwesomeIcon className="text-2xl mr-3" icon="fa-solid fa-play" />
-      );
-    } else {
-      return (
-        <FontAwesomeIcon className="text-2xl mr-3" icon="fa-solid fa-pause" />
-      );
-    }
-  };
+  const artists = useContext(ArtistsContext);
+  const artistID = useContext(ArtistIDContext);
 
   return (
-    <div className="music-player flex flex-col justify-center items-center gap-5 px-2 py-10 mx-2 bg-cyan-950/40 rounded-md">
+    <div className="music-player flex flex-col justify-center items-center gap-5 pt-10 mx-2 my-2 bg-cyan-700/40 rounded-md">
       <img
         className="album-cover w-[200px] h-[190px] p-2"
-        src={album_cover_ok_computer}
+        src={artists
+          .filter(({ id }) => id == artistID)
+          .map(({ album }) => album.map((item) => item.albumcover))}
       />
-      <div className="song-info">
-        <span className="song-title">NO SURPRISES</span>
-        <span className="artist-title">-RADIOHEAD</span>
+      <div className="album-info max-w-56 uppercase text-center">
+        {artists
+          .filter(({ id }) => id == artistID)
+          .map(({ album }) => album.map((item) => item.title))}
+        -
+        {artists.map(({ id, name }) => {
+          if (id == artistID) {
+            return name;
+          }
+        })}
       </div>
-      <div className="music-player-container">
-        <button>
-          <FontAwesomeIcon
-            className="text-2xl mr-3"
-            icon="fa-solid fa-backward"
-          />
-        </button>
-        <button onClick={() => setIsPlay(!isPlay)}>
-          {PlayAndPause(isPlay)}
-        </button>
-        <button>
-          <FontAwesomeIcon
-            className="text-2xl mr-3"
-            icon="fa-solid fa-forward"
-          />
-        </button>
-      </div>
+      <iframe
+        src={artists
+          .filter(({ id }) => id == artistID)
+          .map(({ album }) => album.map((item) => item.playlist.src))}
+        width="260"
+        height="200"
+      ></iframe>
     </div>
   );
 }
