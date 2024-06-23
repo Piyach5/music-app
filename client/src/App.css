@@ -6,7 +6,7 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: 700;
-  color: beige;
+  color: black;
 }
 
 a {
@@ -15,7 +15,7 @@ a {
 }
 
 a:hover {
-  color: burlywood;
+  color: orangered;
 }
 
 .content::-webkit-scrollbar {
@@ -32,4 +32,8 @@ a:hover {
 
 .content::-webkit-scrollbar-thumb:hover {
   background: burlywood;
+}
+
+.logo-title {
+  -webkit-text-stroke: 1px grey;
 }
