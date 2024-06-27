@@ -1,11 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { DebounceInput } from "react-debounce-input";
 
-function Header() {
-  const navigate = useNavigate();
+function Header({ onChange, value }) {
   return (
-    <header className="header flex flex-row justify-end mr-3 my-2 px-5 py-5 bg-cyan-950/40 rounded-md">
+    <header className="header flex flex-row justify-end my-2 mr-1 px-5 py-5 bg-gradient-to-r from-pink-100/40 to-pink-300/40 to-pink-500/40 rounded-md">
       <label htmlFor="seach">SEARCH</label>
-      <input className="ml-5 rounded-sm" name="search" type="text" value={""} />
+      <DebounceInput
+        debounceTimeout={300}
+        className="ml-5 rounded-sm"
+        id="search"
+        name="search"
+        type="text"
+        value={value}
+        onChange={onChange}
+      />
     </header>
   );
 }

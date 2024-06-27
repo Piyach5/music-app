@@ -6,7 +6,11 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: 700;
-  color: black;
+  color: rgba(255, 69, 0, 0.8);
+}
+
+p {
+  color: rgba(255, 69, 0, 1);
 }
 
 a {
@@ -18,22 +22,34 @@ a:hover {
   color: orangered;
 }
 
-.content::-webkit-scrollbar {
+.mainContent-container::-webkit-scrollbar {
   width: 5px;
 }
 
-.content::-webkit-scrollbar-track {
-  background: #f1f1f1;
+.mainContent-container::-webkit-scrollbar-track {
+  background: pink;
 }
 
-.content::-webkit-scrollbar-thumb {
-  background: grey;
+.mainContent-container::-webkit-scrollbar-thumb {
+  background: orange;
 }
 
-.content::-webkit-scrollbar-thumb:hover {
-  background: burlywood;
+.mainContent-container::-webkit-scrollbar-thumb:hover {
+  background: white;
 }
 
-.logo-title {
-  -webkit-text-stroke: 1px grey;
+.music-player::-webkit-scrollbar {
+  width: 5px;
+}
+
+.music-player::-webkit-scrollbar-track {
+  background: pink;
+}
+
+.music-player::-webkit-scrollbar-thumb {
+  background: orange;
+}
+
+.music-player::-webkit-scrollbar-thumb:hover {
+  background: white;
 }
