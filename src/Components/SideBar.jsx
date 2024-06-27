@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import MusicPlayer from "./MusicPlayer";
 import logo from "../assets/logo.jpg";
 
-function SideBar() {
+function SideBar({ artistId, firstOption, secondOption, handleClickOption }) {
   const navigate = useNavigate();
 
   return (
     <div className="sidebar-container w-[40%] h-screen flex flex-col">
-      <div className="side-bar min-h-[30%] flex flex-col justify-around mx-2 mt-2 bg-gradient-to-r from-pink-100/40 to-pink-300/40 to-pink-500/40 rounded-md">
+      <div className="side-bar min-h-[30%] flex flex-col justify-around mx-2 mt-2 bg-gradient-to-r from-pink-300/40 to-pink-200/40 to-pink-100/40 rounded-md">
         <div className="logo-container bg-red-400 flex flex-row justify-around items-center gap-2 mx-4 p-2 rounded-2xl">
           <img className="w-[20%]" src={logo} />
           <img className="w-[20%]" src={logo} />
@@ -17,19 +17,22 @@ function SideBar() {
             MUSIC
           </h1>
         </div>
-        <div className="nav-option flex flex-row justify-end mr-11 text-lg text-orange-500">
-          <a className="login-option ml-5 " onClick={() => navigate("/")}>
-            HOME
+        <div className="nav-option flex flex-row justify-end mr-11 text-lg uppercase">
+          <a
+            className="signup-option ml-5 text-black"
+            onClick={() => navigate("/signup")}
+          >
+            {firstOption}
           </a>
-          <a className="signup-option ml-5" onClick={() => navigate("/signup")}>
-            SIGN UP
-          </a>
-          <a className="login-option ml-3" onClick={() => navigate("/login")}>
-            LOG IN
+          <a
+            className="login-option ml-3 text-orange-500"
+            onClick={handleClickOption}
+          >
+            {secondOption}
           </a>
         </div>
       </div>
-      <MusicPlayer />
+      <MusicPlayer artistId={artistId} />
     </div>
   );
 }
