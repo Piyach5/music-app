@@ -19,6 +19,7 @@ function LogInPage() {
       navigate("/profile");
     } catch (error) {
       console.log(error.message);
+      alert("LOG IN FAILED");
       navigate("/login");
     }
   };

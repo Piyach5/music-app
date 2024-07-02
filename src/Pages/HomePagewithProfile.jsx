@@ -48,18 +48,32 @@ function HomePagewithProfile() {
     setSearchText(event.target.value);
   };
 
+  const handleUserClick = () => {
+    navigate("/profile");
+  };
+
+  const handleLibraryClick = () => {
+    navigate("/library");
+  };
+
   return (
     <main className="flex flex-row">
       <SideBar
         firstOption={userDetail}
         secondOption="log out"
-        handleClickOption={handleLogout}
+        handleFirstOption={handleUserClick}
+        handleSecondOption={handleLogout}
         artistId={artistId}
       />
       <div className="main-container w-[60%] h-screen">
-        <Header onChange={handleChange} value={searchText} />
+        <Header
+          libraryOptionClick={handleLibraryClick}
+          libraryOption="library"
+          onChange={handleChange}
+          value={searchText}
+        />
         <div className="mainContent-container bg-gradient-to-r from-pink-300/40 to-pink-200/40 to-pink-100/40 h-[85%] overflow-scroll overflow-x-hidden rounded-md">
-          <h1 className="title text-4xl mx-28 my-5">ARTISTS</h1>
+          <h1 className="title text-4xl text-black mx-28 my-5">ARTISTS</h1>
           <div className="artist-card-list flex flex-wrap justify-center px-16">
             {artists.map(({ name, image, artist_id }) => {
               return (

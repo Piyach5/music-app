@@ -13,17 +13,19 @@ function SignupPage() {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      alert("Invalid Email");
-      setEmail(null);
-    }
-    if (username.length > 10) {
-      alert("Username must be between 1 to 10 characters");
-      setUsername(null);
-    }
-    if (password.length < 8) {
-      alert("Password must have at least 8 characters");
-      setPassword(null);
+    if (
+      !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email) ||
+      username.length > 10 ||
+      password.length < 8
+    ) {
+      alert(
+        "Email must be valid." +
+          "\n" +
+          "Username must be between 1 to 10 characters." +
+          "\n" +
+          "Password must have at least 8 characters."
+      );
+      return;
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
@@ -60,7 +62,11 @@ function SignupPage() {
         name="username"
         type="text"
         placeholder="username"
-        onChange={(event) => setUsername(event.target.value)}
+        value={username}
+        onChange={(event) => {
+          event.preventDefault();
+          setUsername(event.target.value);
+        }}
         required
       />
       <label
@@ -74,7 +80,11 @@ function SignupPage() {
         name="email"
         type="email"
         placeholder="email"
-        onChange={(event) => setEmail(event.target.value)}
+        value={email}
+        onChange={(event) => {
+          event.preventDefault();
+          setEmail(event.target.value);
+        }}
         required
       />
       <label
@@ -88,7 +98,11 @@ function SignupPage() {
         name="password"
         type="password"
         placeholder="password"
-        onChange={(event) => setPassword(event.target.value)}
+        value={password}
+        onChange={(event) => {
+          event.preventDefault();
+          setPassword(event.target.value);
+        }}
         required
       />
       <button

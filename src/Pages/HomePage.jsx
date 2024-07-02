@@ -20,7 +20,11 @@ function HomePage() {
     setSearchText(event.target.value);
   };
 
-  const handleClick = () => {
+  const handleSignUp = () => {
+    navigate("/signup");
+  };
+
+  const handleLogin = () => {
     navigate("/login");
   };
 
@@ -29,7 +33,8 @@ function HomePage() {
       <SideBar
         firstOption="sign up"
         secondOption="log in"
-        handleClickOption={handleClick}
+        handleFirstOption={handleSignUp}
+        handleSecondOption={handleLogin}
         artistId={artistId}
       />
       <div className="main-container w-[60%] h-screen">
